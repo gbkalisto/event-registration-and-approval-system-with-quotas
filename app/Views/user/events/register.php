@@ -19,6 +19,11 @@ include_once APPPATH . 'Views/layouts/header.php';
         <!-- Create Event -->
         <div class="col-md-8 mx-auto">
             <h4>Register for <?= esc($event['name']) ?></h4>
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="alert alert-danger">
+                    <?= esc(session()->getFlashdata('error')) ?>
+                </div>
+            <?php endif; ?>
 
             <form method="post">
                 <?= csrf_field() ?>
@@ -28,40 +33,40 @@ include_once APPPATH . 'Views/layouts/header.php';
                         <label class="form-label"><?= esc($field['label']) ?></label>
 
                         <?php if ($field['field_type'] === 'text'): ?>
-
-                           
-                            <input
-                                type="text"
+                            <input type="text"
                                 name="<?= esc($field['field_name']) ?>"
                                 class="form-control"
+                                value="<?= old($field['field_name']) ?>"
                                 <?= $field['required'] ? 'required' : '' ?>>
 
                         <?php elseif ($field['field_type'] === 'number'): ?>
-                            <input
-                                type="number"
+                            <input type="number"
                                 name="<?= esc($field['field_name']) ?>"
                                 class="form-control"
+                                value="<?= old($field['field_name']) ?>"
                                 <?= $field['required'] ? 'required' : '' ?>>
 
                         <?php elseif ($field['field_type'] === 'email'): ?>
-                            <input
-                                type="email"
+                            <input type="email"
                                 name="<?= esc($field['field_name']) ?>"
                                 class="form-control"
+                                value="<?= old($field['field_name']) ?>"
                                 <?= $field['required'] ? 'required' : '' ?>>
 
                         <?php elseif ($field['field_type'] === 'dropdown'): ?>
-                            <select
-                                name="<?= esc($field['field_name']) ?>"
-                                class="form-control">
+                            <select name="<?= esc($field['field_name']) ?>"
+                                class="form-control"
+                                <?= $field['required'] ? 'required' : '' ?>>
+                                <option value="">Select</option>
                                 <?php foreach (explode(',', $field['field_options']) as $opt): ?>
-                                    <option value="<?= esc(trim($opt)) ?>">
-                                        <?= esc(trim($opt)) ?>
+                                    <?php $opt = trim($opt); ?>
+                                    <option value="<?= esc($opt) ?>"
+                                        <?= old($field['field_name']) === $opt ? 'selected' : '' ?>>
+                                        <?= esc($opt) ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
                         <?php endif; ?>
-
                     </div>
                 <?php endforeach; ?>
 
@@ -69,6 +74,7 @@ include_once APPPATH . 'Views/layouts/header.php';
                     Submit Registration
                 </button>
             </form>
+
 
 
         </div>

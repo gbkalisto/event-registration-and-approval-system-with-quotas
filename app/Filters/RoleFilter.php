@@ -13,7 +13,9 @@ class RoleFilter implements FilterInterface
         $role = session()->get('role');
 
         if (!in_array($role, $arguments)) {
-            return redirect()->back();
+            // return redirect()->back();
+            return redirect()->to('/dashboard')
+                ->with('error', 'Unauthorized access');
         }
     }
 
