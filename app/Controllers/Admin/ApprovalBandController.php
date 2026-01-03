@@ -70,4 +70,21 @@ class ApprovalBandController extends BaseController
 
         return redirect()->back()->with('success', 'Approval band added');
     }
+
+    // delete quota
+    public function delete($approvalBandId)
+    {
+        // echo $quotaId;
+        // exit;
+        $approvalBandModel = new ApprovalBandModel();
+        $approvalBand = $approvalBandModel->find($approvalBandId);
+
+        if (!$approvalBand) {
+            return redirect()->back()->with('error', 'Approval band not found');
+        }
+
+        $approvalBandModel->delete($approvalBandId);
+
+        return redirect()->back()->with('success', 'Approval band deleted successfully');
+    }
 }

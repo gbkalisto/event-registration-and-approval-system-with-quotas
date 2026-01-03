@@ -29,9 +29,11 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin']], function ($routes)
 
     $routes->get('events/(:num)/approval-bands', 'Admin\ApprovalBandController::index/$1');
     $routes->post('events/(:num)/approval-bands', 'Admin\ApprovalBandController::store/$1');
+    $routes->get('approval-bands/(:num)/delete', 'Admin\ApprovalBandController::delete/$1');
 
     $routes->get('events/(:num)/form-fields', 'Admin\FormNodeController::index/$1');
     $routes->post('events/(:num)/form-fields', 'Admin\FormNodeController::store/$1');
+    $routes->get('form-nodes/(:num)/delete', 'Admin\FormNodeController::delete/$1');
 });
 
 $routes->group('user', ['filter' => ['auth', 'role:employee,manager,director,external']], function ($routes) {

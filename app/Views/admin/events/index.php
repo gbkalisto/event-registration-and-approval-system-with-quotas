@@ -11,7 +11,18 @@ include_once APPPATH . 'Views/layouts/header.php';
     <a href="<?= base_url('admin/dashboard') ?>" class="btn btn-secondary btn-sm mb-3">
         ← Back to Dashboard
     </a>
+    <!-- Flash Messages -->
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
 
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
     <!-- Dashboard Cards -->
     <div class="row g-3">
 
@@ -28,9 +39,9 @@ include_once APPPATH . 'Views/layouts/header.php';
                         <td><?= esc($event['name']) ?></td>
                         <td><?= $event['start_date'] ?> → <?= $event['end_date'] ?></td>
                         <td>
-                            <a class="btn btn-warning btn-sm" href="<?= base_url('admin/events/' . $event['id'] . '/edit') ?>">Edit</a> 
-                            <a class="btn btn-primary btn-sm" href="<?= base_url('admin/events/' . $event['id'] . '/quotas') ?>">Quotas</a> 
-                            <a class="btn btn-primary btn-sm" href="<?= base_url('admin/events/' . $event['id'] . '/approval-bands') ?>">Approval Bands</a> 
+                            <a class="btn btn-warning btn-sm" href="<?= base_url('admin/events/' . $event['id'] . '/edit') ?>">Edit</a>
+                            <a class="btn btn-primary btn-sm" href="<?= base_url('admin/events/' . $event['id'] . '/quotas') ?>">Quotas</a>
+                            <a class="btn btn-primary btn-sm" href="<?= base_url('admin/events/' . $event['id'] . '/approval-bands') ?>">Approval Bands</a>
                             <a class="btn btn-primary btn-sm" href="<?= base_url('admin/events/' . $event['id'] . '/form-fields') ?>">Form Fields</a>
                         </td>
                     </tr>

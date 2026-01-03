@@ -29,7 +29,7 @@ class EventController extends BaseController
             'end_date'    => $this->request->getPost('end_date'),
         ]);
 
-        return redirect()->to('/admin/events');
+        return redirect()->to('/admin/events')->with('success', 'Event added successfully!');
     }
 
     public function edit($id)
@@ -62,6 +62,6 @@ class EventController extends BaseController
             'end_date'    => $this->request->getPost('end_date'),
         ];
         $eventModel->update($id, $updateData);
-        return redirect()->to('/admin/events');
+        return redirect()->to('/admin/events')->with('success', 'Event updated successfully!');
     }
 }

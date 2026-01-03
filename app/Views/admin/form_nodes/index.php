@@ -34,6 +34,7 @@ include_once APPPATH . 'Views/layouts/header.php';
                 <th>Field Name</th>
                 <th>Type</th>
                 <th>Required</th>
+                <th>Option</th>
             </tr>
         </thead>
         <tbody>
@@ -43,7 +44,21 @@ include_once APPPATH . 'Views/layouts/header.php';
                         <td><?= esc($node['label']) ?></td>
                         <td><?= esc($node['field_name']) ?></td>
                         <td><?= esc($node['field_type']) ?></td>
-                        <td><?= $node['required'] ? 'Yes' : 'No' ?></td>
+                        <td><?= $node['required'] ? 'Yes' : 'No' ?> <?php if (!empty($node['field_options'])) {
+                                                                        echo "|";
+                                                                    } ?>
+                            <?php
+                            $op = explode(',', $node['field_options']);
+                            echo implode(', ', $op);
+                            ?>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-danger"
+                                href="<?= base_url('admin/form-nodes/' . $node['id'] . '/delete') ?>"
+                                onclick="return confirm('Are you sure you want to delete this form node? This action cannot be undone.');">
+                                Delete
+                            </a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

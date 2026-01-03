@@ -33,6 +33,7 @@ include_once APPPATH . 'Views/layouts/header.php';
             <tr>
                 <th>Order</th>
                 <th>Role</th>
+                <th>Option</th>
             </tr>
         </thead>
         <tbody>
@@ -41,6 +42,14 @@ include_once APPPATH . 'Views/layouts/header.php';
                     <tr>
                         <td><?= $band['band_order'] ?></td>
                         <td><?= ucfirst($band['role']) ?></td>
+                        <!-- <td><a href="" class="btn btn-danger btn-sm">Delete</a></td> -->
+                        <td>
+                            <a class="btn btn-sm btn-danger"
+                                href="<?= base_url('admin/approval-bands/' . $band['id'] . '/delete') ?>"
+                                onclick="return confirm('Are you sure you want to delete this approval band? This action cannot be undone.');">
+                                Delete
+                            </a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

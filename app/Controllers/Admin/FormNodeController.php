@@ -47,4 +47,22 @@ class FormNodeController extends BaseController
 
         return redirect()->back()->with('success', 'Form field added');
     }
+
+
+    // delete quota
+    public function delete($formId)
+    {
+        // echo $quotaId;
+        // exit;
+        $formNodeModel = new FormNodeModel();
+        $formNode = $formNodeModel->find($formId);
+
+        if (!$formNode) {
+            return redirect()->back()->with('error', 'Form node not found');
+        }
+
+        $formNodeModel->delete($formId);
+
+        return redirect()->back()->with('success', 'Form node deleted successfully');
+    }
 }
